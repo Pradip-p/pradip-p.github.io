@@ -42,26 +42,36 @@
         }
 
         .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .nav-brand h1 {
+            font-size: 1.5rem;
+            color: var(--text);
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
         }
-
-        .nav-link {
-            text-decoration: none;
+        
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
             color: var(--text);
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            cursor: pointer;
         }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        
 
         .nav-link:hover {
             background: var(--primary);
@@ -294,7 +304,35 @@
             padding: 2rem;
             margin-top: 5rem;
         }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+                z-index: 999;
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        
+            .nav-link {
+                padding: 1rem;
+                text-align: center;
+            }
+        
+            .nav-toggle {
+                display: block;
+            }
+        }
 
+        
         @media (max-width: 768px) {
             .hero-content {
                 grid-template-columns: 1fr;
@@ -323,7 +361,13 @@
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <div class="nav-links">
+            <div class="nav-brand">
+                <h1>Pradip Thapa</h1>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
                 <a href="#about" class="nav-link">About</a>
                 <a href="#journey" class="nav-link">Journey</a>
                 <a href="#skills" class="nav-link">Skills</a>
@@ -332,6 +376,7 @@
             </div>
         </div>
     </nav>
+    
 
     <section class="hero">
         <div class="hero-content">
@@ -420,15 +465,15 @@
         <h2 class="timeline-title" style="color: white;">Featured Projects</h2>
         <div class="achievement-grid">
             <div class="achievement-card">
-                <h3>Drone Tasking Manager</h3>
+                <h3><a href="https://dronetm.org" target="_blank" style="color: white; text-decoration: none;">Drone Tasking Manager</a></h3>
                 <p>Open-source solution for generating high-resolution aerial maps through crowd-sourcing.</p>
             </div>
             <div class="achievement-card">
-                <h3>National Geoportal</h3>
+                <h3><a href="https://nationalgeoportal.gov.np/" target="_blank" style="color: white; text-decoration: none;">National Geoportal</a></h3>
                 <p>Centralized platform for geo-information management and spatial data sharing.</p>
             </div>
             <div class="achievement-card">
-                <h3>Bheemdatta Metric Addressing</h3>
+                <h3><a href="https://bheemdatta-metric-stag.naxa.com.np" target="_blank" style="color: white; text-decoration: none;">Bheemdatta Metric Addressing</a></h3>
                 <p>Innovative addressing system using frontier technology and participatory mapping.</p>
             </div>
         </div>
@@ -453,4 +498,24 @@
     <footer>
         <p>&copy; 2024 Pradip Thapa. All rights reserved.</p>
     </footer>
+    <script>
+        // Toggle navigation menu on smaller screens
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+    
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    
+        // Close menu when a link is clicked
+        const navLinkItems = document.querySelectorAll('.nav-link');
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body
+</html>
